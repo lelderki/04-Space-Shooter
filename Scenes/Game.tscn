@@ -1,0 +1,128 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://moon-and-earth-in-space.jpg" type="Texture" id=1]
+[ext_resource path="res://Scripts/Bullets.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=3]
+[ext_resource path="res://Spaceship_tut.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Meteors.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Enemies.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Enemy1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Enemy2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Enemy3.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Enemy4.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/HUD.gd" type="Script" id=11]
+[ext_resource path="res://EHSMB.TTF" type="DynamicFontData" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 31
+font_data = ExtResource( 12 )
+
+[node name="Game" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Background"]
+position = Vector2( 310.5, 678.688 )
+scale = Vector2( 0.464375, 0.464375 )
+texture = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+margin_left = -39.0
+margin_top = -7.0
+margin_right = 624.0
+margin_bottom = 1045.0
+color = Color( 0, 0, 0, 0.490196 )
+
+[node name="Bullets" type="Node2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="Bullets"]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="Enemy Bullets" type="Node2D" parent="."]
+
+[node name="Player" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 303.948, 966.478 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Player"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+scale = Vector2( 0.3, 0.3 )
+polygon = PoolVector2Array( 31, -88, 31, -80.3, 30.5, -77.5, 41, -41.8, 41, -17.5, 40, -17.5, 40, -7.5, 37.1, -7.5, 31, -6, 31, 22.5, 34.2, 22.5, 37.3, 1.5, 39.5, 1.5, 45, -1.8, 47, -0.699997, 47, 0.0999985, 53, 2.1, 53, 7.5, 57.5, 25.5, 58.6, 25.5, 61, 27, 61, -4.3, 65.2, -8.5, 69.5, -8.5, 75, -5.7, 75, -4, 82, 5.9, 82, 62.5, 79, 62.5, 79, 71.5, 77.1, 71.5, 75.1, 74.5, 58.4, 74.5, 51, 76.1, 51, 76.7, 43.7, 120.5, 7, 120.5, 7, 117.9, 3.3, 100.5, -3, 100.5, -3, 104.6, -6, 106.6, -6, 118.3, -8.2, 120.5, -44, 120.5, -44, 117.5, -44.8, 108.5, -48, 104.1, -48, 97.4, -47.2, 90.3, -52, 83.1, -52, 81.4, -51.3, 76.5, -54.1, 76.5, -76, 74.3, -76, 72.6, -79, 70.6, -79, 62.5, -82, 62.5, -82, 7.5, -78.4, -2.5, -76.5, -2.5, -66, -8.8, -64, -7.7, -64, -6.6, -61, -4.6, -61, 27, -56, 22.6, -56, 12.2, -52.4, 1.5, -50.5, 1.5, -45.6, -1.5, -40.7, -1.5, -34, 13.1, -34, 22.5, -31, 22.5, -31, -5.5, -37.8, -5.5, -41.2, -43.5, -39.7, -43.5, -34.7, -69.5, -33.2, -69.5, -30, -76, -30, -77.5, -31.2, -89.5, -29.2, -89.5, -14, -120, -3, -120.5, -3, -107.5, 3, -107.5, 3, -120.5, 14, -120.5 )
+
+[node name="Meteors" type="Node2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 5 )
+
+[node name="Timer" type="Timer" parent="Meteors"]
+autostart = true
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2( 0, -100 )
+script = ExtResource( 6 )
+
+[node name="Timer" type="Timer" parent="Enemies"]
+autostart = true
+
+[node name="Enemy1" parent="Enemies" instance=ExtResource( 7 )]
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 8 )]
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 9 )]
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 10 )]
+
+[node name="Explosions" type="Node2D" parent="."]
+
+[node name="HUD" type="Node2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 11 )
+
+[node name="Health" type="Label" parent="HUD"]
+margin_left = 9.57288
+margin_top = 109.496
+margin_right = 89.5729
+margin_bottom = 126.496
+custom_fonts/font = SubResource( 1 )
+text = "Health: "
+align = 1
+
+[node name="Score" type="Label" parent="HUD"]
+margin_left = 501.914
+margin_top = 108.853
+margin_right = 561.914
+margin_bottom = 125.853
+custom_fonts/font = SubResource( 2 )
+text = "SCORE:"
+align = 1
+
+[node name="Label" type="Label" parent="HUD"]
+margin_left = 2.30847
+margin_top = 11.5423
+margin_right = 602.308
+margin_bottom = 78.5423
+custom_fonts/font = SubResource( 3 )
+text = "save planet earth 
+from the alien invasion!!"
+align = 1
+[connection signal="timeout" from="Bullets/Timer" to="Bullets" method="_on_Timer_timeout"]
+[connection signal="health_changed" from="Player" to="HUD" method="_on_Player_health_changed"]
+[connection signal="score_changed" from="Player" to="HUD" method="_on_Player_score_changed"]
+[connection signal="timeout" from="Meteors/Timer" to="Meteors" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Enemies/Timer" to="Enemies" method="_on_Timer_timeout"]
